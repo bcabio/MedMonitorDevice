@@ -1,22 +1,23 @@
 import time, requests
 import RPi.GPIO as GPIO
 
-INPUT_PIN = 4
+INPUT_PIN = 23
 
 URL = "https://mangohacksflask.herokuapp.com/drawer_update"
 
-current_status = False
+current_status = True
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(INPUT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(INPUT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # check GPIO device for status of drawer position
 def check_status():
     # read GPIO
     pin_status = GPIO.input(INPUT_PIN) # true is closed, false is open, so 
+    print (pin_status)
 
     # return output
-    return !(pin_status) # invert so true is open, false is closed
+    return (pin_status) # invert so true is open, false is closed
 
 # push data = {isOpen, timestamp} to our database
 def push_results(status):
@@ -40,4 +41,4 @@ while(True):
         current_status = new_status
 
     # Wait x seconds for next check
-    sleep(1)
+    time.sleep(1)
