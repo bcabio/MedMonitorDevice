@@ -3,9 +3,9 @@ import RPi.GPIO as GPIO
 
 INPUT_PIN = 23
 
-URL = "https://mangohacksflask.herokuapp.com/drawer_update"
+URL = "https://mangohacksflask.herokuapp.com/drawerUpdate"
 
-current_status = True
+current_status = False
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(INPUT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -28,7 +28,7 @@ def push_results(status):
     data["ts"] = timestamp
 
     # Upload to server
-    response = r.requests.post(url = URL, data = data)
+    response = requests.post(url = URL, data = data)
 
     return
 
