@@ -26,7 +26,8 @@ def push_results(status):
     data = {}
     data["isOpen"] = status
     data["ts"] = timestamp
-
+    data["owner"] = "DrawerDemo"
+    print(data)
     # Upload to server
     response = requests.post(url = URL, data = data)
 
